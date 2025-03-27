@@ -11,8 +11,6 @@ public class PasswordSubstitutionCipherService extends CipherService {
 
     @Override
     public String encrypt(String text, String key) {
-        text = text.toUpperCase();
-        key = key.toUpperCase();
 
         StringBuilder alphabet = new StringBuilder(key);
         for (char c : ALPHABET.toCharArray()) {
@@ -34,8 +32,7 @@ public class PasswordSubstitutionCipherService extends CipherService {
 
     @Override
     public String decrypt(String text, String key) {
-        text = text.toUpperCase();
-        key = key.toUpperCase();
+
 
         StringBuilder alphabet = new StringBuilder(key);
         for (char c : ALPHABET.toCharArray()) {

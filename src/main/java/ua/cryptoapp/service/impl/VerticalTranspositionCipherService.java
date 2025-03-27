@@ -30,7 +30,6 @@ public class VerticalTranspositionCipherService extends CipherService {
             }
         }
 
-        // Определение порядка столбцов по алфавиту
         Integer[] columnOrder = new Integer[key.length()];
         for (int i = 0; i < key.length(); i++) {
             columnOrder[i] = i;
@@ -44,7 +43,6 @@ public class VerticalTranspositionCipherService extends CipherService {
             }
         }
 
-        // Добавление пробелов для групп по 5 символов
         StringBuilder formattedResult = new StringBuilder();
         for (int i = 0; i < result.length(); i++) {
             formattedResult.append(result.charAt(i));
@@ -63,7 +61,6 @@ public class VerticalTranspositionCipherService extends CipherService {
         int rows = (int) Math.ceil((double) text.length() / key.length());
         char[][] matrix = new char[rows][key.length()];
 
-        // Определение порядка столбцов
         Integer[] columnOrder = new Integer[key.length()];
         for (int i = 0; i < key.length(); i++) {
             columnOrder[i] = i;
@@ -71,7 +68,6 @@ public class VerticalTranspositionCipherService extends CipherService {
         String finalKey = key;
         Arrays.sort(columnOrder, Comparator.comparingInt(finalKey::charAt));
 
-        // Заполнение матрицы
         int index = 0;
         for (int col : columnOrder) {
             for (int row = 0; row < rows; row++) {
@@ -79,7 +75,6 @@ public class VerticalTranspositionCipherService extends CipherService {
             }
         }
 
-        // Чтение расшифрованного текста
         StringBuilder result = new StringBuilder();
         for (int row = 0; row < rows; row++) {
             for (int col = 0; col < key.length(); col++) {
