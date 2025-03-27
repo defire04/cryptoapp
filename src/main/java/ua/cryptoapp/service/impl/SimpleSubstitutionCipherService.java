@@ -11,7 +11,6 @@ public class SimpleSubstitutionCipherService extends CipherService {
 
     @Override
     public String encrypt(String text, String key) {
-        text = text.toUpperCase();
         StringBuilder result = new StringBuilder();
 
         for (char c : text.toCharArray()) {
@@ -24,23 +23,5 @@ public class SimpleSubstitutionCipherService extends CipherService {
         }
         return result.toString();
     }
-
-    @Override
-    public String decrypt(String text, String key) {
-        text = text.toUpperCase();
-        StringBuilder result = new StringBuilder();
-
-        for (char c : text.toCharArray()) {
-            int keyIndex = key.indexOf(c);
-            if (keyIndex != -1) {
-                result.append(ALPHABET.charAt(keyIndex));
-            } else {
-                result.append(c);
-            }
-        }
-
-        return result.toString();
-    }
-
 
 }

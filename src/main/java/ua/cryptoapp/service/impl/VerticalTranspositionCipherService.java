@@ -10,15 +10,14 @@ import java.util.Comparator;
 @Service
 @NoArgsConstructor
 public class VerticalTranspositionCipherService extends CipherService {
+
     @Override
     public String encrypt(String text, String key) {
-        text = text.toUpperCase().replace(" ", "");
-        key = key.toUpperCase();
+        text = text.replace(" ", "");
 
         int rows = (int) Math.ceil((double) text.length() / key.length());
         char[][] matrix = new char[rows][key.length()];
 
-        // Заполнение матрицы
         int index = 0;
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < key.length(); j++) {
@@ -43,10 +42,16 @@ public class VerticalTranspositionCipherService extends CipherService {
             }
         }
 
+        return formatResult(result.toString(), text.length());
+    }
+
+    private String formatResult(String encryptedText, int originalLength) {
+        int blockSize = calculateBlockSize(originalLength);
         StringBuilder formattedResult = new StringBuilder();
-        for (int i = 0; i < result.length(); i++) {
-            formattedResult.append(result.charAt(i));
-            if ((i + 1) % 5 == 0 && i < result.length() - 1) {
+
+        for (int i = 0; i < encryptedText.length(); i++) {
+            formattedResult.append(encryptedText.charAt(i));
+            if ((i + 1) % blockSize == 0 && i < encryptedText.length() - 1) {
                 formattedResult.append(' ');
             }
         }
@@ -54,34 +59,10 @@ public class VerticalTranspositionCipherService extends CipherService {
         return formattedResult.toString();
     }
 
-    @Override
-    public String decrypt(String text, String key) {
-        key = key.toUpperCase();
-
-        int rows = (int) Math.ceil((double) text.length() / key.length());
-        char[][] matrix = new char[rows][key.length()];
-
-        Integer[] columnOrder = new Integer[key.length()];
-        for (int i = 0; i < key.length(); i++) {
-            columnOrder[i] = i;
+    private int calculateBlockSize(int length) {
+        if (length <= 21) {
+            return 3;
         }
-        String finalKey = key;
-        Arrays.sort(columnOrder, Comparator.comparingInt(finalKey::charAt));
-
-        int index = 0;
-        for (int col : columnOrder) {
-            for (int row = 0; row < rows; row++) {
-                matrix[row][col] = text.charAt(index++);
-            }
-        }
-
-        StringBuilder result = new StringBuilder();
-        for (int row = 0; row < rows; row++) {
-            for (int col = 0; col < key.length(); col++) {
-                result.append(matrix[row][col]);
-            }
-        }
-
-        return result.toString();
+        return 5;
     }
 }

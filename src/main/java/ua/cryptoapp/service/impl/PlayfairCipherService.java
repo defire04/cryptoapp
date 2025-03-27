@@ -1,6 +1,8 @@
 package ua.cryptoapp.service.impl;
 
 import lombok.NoArgsConstructor;
+import org.springframework.lang.NonNull;
+import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Service;
 import ua.cryptoapp.service.CipherService;
 
@@ -34,7 +36,7 @@ public class PlayfairCipherService extends CipherService {
     }
 
     @Override
-    public String encrypt(String text, String key) {
+    public String encrypt(@NonNull String text,  @Nullable String key) {
         generateKeyMatrix();
         text = text.replace(" ", "_");
 
@@ -71,35 +73,4 @@ public class PlayfairCipherService extends CipherService {
         return result.toString();
     }
 
-    @Override
-    public String decrypt(String text, String key) {
-        generateKeyMatrix();
-
-        StringBuilder result = new StringBuilder();
-        for (int i = 0; i < text.length(); i += 2) {
-            char first = text.charAt(i);
-            char second = text.charAt(i + 1);
-
-            int[] pos1 = findPosition(first);
-            int[] pos2 = findPosition(second);
-
-            if (pos1 == null || pos2 == null) {
-                result.append(first).append(second);
-                continue;
-            }
-
-            if (pos1[0] == pos2[0]) {
-                result.append(keyMatrix[pos1[0]][(pos1[1] - 1 + 5) % 5]);
-                result.append(keyMatrix[pos2[0]][(pos2[1] - 1 + 5) % 5]);
-            } else if (pos1[1] == pos2[1]) {
-                result.append(keyMatrix[(pos1[0] - 1 + 6) % 6][pos1[1]]);
-                result.append(keyMatrix[(pos2[0] - 1 + 6) % 6][pos2[1]]);
-            } else {
-                result.append(keyMatrix[pos1[0]][pos2[1]]);
-                result.append(keyMatrix[pos2[0]][pos1[1]]);
-            }
-        }
-
-        return result.toString();
-    }
 }

@@ -14,7 +14,7 @@ public enum CipherType {
 {
     "text": "KOZHUKHOVSKY",
     "cipherType": "SIMPLE_SUBSTITUTION",
-    "key": "KWRHPTBNU_DOZEFJCYVGAIXMQLS"
+     "key": "KWRHPTBNU_DOZEJFCYVGAIXMQLS"
 }
 Завдання 2. Зашифрувати відкритий текст KOZHUKHOVSKY над
 латинським алфавітом за допомогою гаслового шифру.

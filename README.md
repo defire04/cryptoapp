@@ -8,13 +8,13 @@ Encrypt the plaintext **KOZHUKHOVSKY** using a simple substitution cipher.
 {
     "text": "KOZHUKHOVSKY",
     "cipherType": "SIMPLE_SUBSTITUTION",
-    "key": "KWRHPTBNU_DOZEFJCYVGAIXMQLS"
+    "key": "KWRHPTBNU_DOZEJFCYVGAIXMQLS"
 }
 ```
 
 **Encrypted Text:**
 ```
-DFLNADNFIVDQ
+DJLNADNFIVDQ
 ```
 
 ---
@@ -64,8 +64,7 @@ Encrypt the plaintext **KOZHUKHOVSKY** using the Playfair cipher.
 ```json
 {
     "text": "KOZHUKHOVSKY",
-    "cipherType": "PLAYFAIR",
-    "key": "SECURITY"
+    "cipherType": "PLAYFAIR"
 }
 ```
 
