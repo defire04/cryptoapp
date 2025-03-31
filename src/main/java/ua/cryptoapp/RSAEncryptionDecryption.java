@@ -67,7 +67,6 @@ public class RSAEncryptionDecryption {
         return d;
     }
 
-    // Розширений алгоритм Евкліда для знаходження d такого, що (d * e) % phi = 1
     public static int extendedEuclidean(int a, int b) {
         int x0 = 1, x1 = 0, y0 = 0, y1 = 1;
         int q, temp;
