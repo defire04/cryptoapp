@@ -60,6 +60,10 @@ public class RSAEncryptionDecryption {
 
     // Обчислення закритого ключа за допомогою розширеного алгоритму Евкліда
     public static int calculatePrivateKey(int e, int phi) {
+        if (!BigInteger.valueOf(phi).gcd(BigInteger.valueOf(e)).equals(BigInteger.ONE) || phi < e) {
+            throw new RuntimeException("e parameter is invalid");
+        }
+
         int d = extendedEuclidean(e, phi);
         if (d < 0) { //-75
             d += phi;
